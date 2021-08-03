@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Photo Gallery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <noscript>
+        <link rel="stylesheet" th:href="@{/css/noscript.css}"/>
+    </noscript>
+
+</head>
+<body class="is-preload">
+
+<div id="wrapper">
+    <header id="header">
+        <div class="dropup">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-flip="true" data-toggle="dropdown">Choose
+                Album
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <a th:each="album : ${albums}" th:href="@{/filterByAlbum?albumId={album}(album=${album})}">
+                    <li th:text="${album}"></li>
+                </a>
+            </ul>
+        </div>
+    </header>
+    <div id="main">
+        <article class="thumb" th:each="photo : ${photos}">
+            <a class="image" th:href="@{/{path}(path=${photo.getPathStr()})}">
+                <img th:src="@{/{path}(path=${photo.getPathStr()})}"
+                     alt=""/></a>
+            <a class="btn btn-primary btn-lg" th:href="${photo.getBuiltUri()}" role="button">download</a>
+            <button type="button" data-container="body" data-toggle="popover" th:title="
+            'Title:  '+${photo.getTitle()}+
+            '&#013;Size:  '+${photo.getSize()}+ ' KB'+
+            '&#013;Date:  '+${photo.getDownloadedDate()}">
+                Info
+            </button>
+        </article>
+    </div>
+
+    <footer id="footer" class="panel">
+        <div class="inner split">
+
+        </div>
+    </footer>
+
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.poptrox.min.js}"></script>
+<script th:src="@{/js/browser.min.js}"></script>
+<script th:src="@{/js/breakpoints.min.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
