@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "storage",
+      "type": "com.example.servingwebcontent.PhotosController",
+      "sourceType": "com.example.servingwebcontent.PhotosController"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
